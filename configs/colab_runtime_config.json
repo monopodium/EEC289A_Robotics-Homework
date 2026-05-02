@@ -26,85 +26,26 @@
     "num_eval_envs": 128,
     "num_evals": 5,
     "batch_size": 256,
-    "policy_hidden_layer_sizes": [
-      256,
-      256,
-      128
-    ],
-    "value_hidden_layer_sizes": [
-      256,
-      256,
-      128
-    ]
+    "policy_hidden_layer_sizes": [256, 256, 128],
+    "value_hidden_layer_sizes": [256, 256, 128]
   },
   "stage_1": {
     "name": "stage_1",
     "num_timesteps": 10000000,
-    "command_range": {
-      "min": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "max": [
-        0.8,
-        0.0,
-        0.0
-      ]
-    },
-    "command_keep_prob": [
-      1.0,
-      0.0,
-      0.0
-    ],
-    "reward_scales": {
-      "action_rate": -0.02,
-      "energy": -0.0015
-    }
+    "command_range": {"min": [0.0, 0.0, 0.0], "max": [0.8, 0.0, 0.0]},
+    "command_keep_prob": [1.0, 0.0, 0.0],
+    "reward_scales": {"action_rate": -0.02, "energy": -0.0015}
   },
   "stage_2": {
     "name": "stage_2",
     "num_timesteps": 8000000,
-    "command_range": {
-      "min": [
-        -1.0,
-        -0.4,
-        -1.0
-      ],
-      "max": [
-        1.0,
-        0.4,
-        1.0
-      ]
-    },
-    "command_keep_prob": [
-      0.9,
-      0.5,
-      0.7
-    ],
+    "command_range": {"min": [-1.0, -0.4, -1.0], "max": [1.0, 0.4, 1.0]},
+    "command_keep_prob": [0.9, 0.5, 0.7],
     "student_stage2_goal": {
-      "command_range": {
-        "min": [
-          -1.0,
-          -0.4,
-          -1.0
-        ],
-        "max": [
-          1.0,
-          0.4,
-          1.0
-        ]
-      },
-      "command_keep_prob": [
-        0.9,
-        0.5,
-        0.7
-      ]
+      "command_range": {"min": [-1.0, -0.4, -1.0], "max": [1.0, 0.4, 1.0]},
+      "command_keep_prob": [0.9, 0.5, 0.7]
     },
-    "reward_scales": {
-      "action_rate": -0.03,
-      "energy": -0.002
-    },
+    "reward_scales": {"action_rate": -0.03, "energy": -0.002},
     "restore_previous_stage_checkpoint": true
   },
   "demo_rollout": {
@@ -127,58 +68,19 @@
   "public_eval": {
     "episode_length_seconds": 30.0,
     "safe_command_ranges": {
-      "vx": [
-        -0.6,
-        0.6
-      ],
-      "vy": [
-        -0.2,
-        0.2
-      ],
-      "yaw": [
-        -0.6,
-        0.6
-      ]
+      "vx": [-0.6, 0.6],
+      "vy": [-0.2, 0.2],
+      "yaw": [-0.6, 0.6]
     },
     "metrics": {
-      "velocity_tracking_error": {
-        "direction": "lower_better",
-        "weight": 0.35,
-        "good": 0.1,
-        "bad": 0.45
-      },
-      "yaw_tracking_error": {
-        "direction": "lower_better",
-        "weight": 0.2,
-        "good": 0.1,
-        "bad": 0.5
-      },
-      "fall_rate": {
-        "direction": "lower_better",
-        "weight": 0.2,
-        "good": 0.0,
-        "bad": 0.35
-      },
-      "energy_proxy": {
-        "direction": "lower_better",
-        "weight": 0.15,
-        "good": 8.0,
-        "bad": 40.0
-      },
-      "foot_slip_proxy": {
-        "direction": "lower_better",
-        "weight": 0.1,
-        "good": 0.02,
-        "bad": 0.2
-      }
+      "velocity_tracking_error": {"direction": "lower_better", "weight": 0.35, "good": 0.1, "bad": 0.45},
+      "yaw_tracking_error":      {"direction": "lower_better", "weight": 0.2,  "good": 0.1, "bad": 0.5},
+      "fall_rate":               {"direction": "lower_better", "weight": 0.2,  "good": 0.0, "bad": 0.35},
+      "energy_proxy":            {"direction": "lower_better", "weight": 0.15, "good": 8.0, "bad": 40.0},
+      "foot_slip_proxy":         {"direction": "lower_better", "weight": 0.1,  "good": 0.02, "bad": 0.2}
     }
   },
-  "files_to_read_first": [
-    "go2_pg_env/joystick.py",
-    "train.py",
-    "benchmark_specs.py",
-    "public_eval.py"
-  ],
+  "files_to_read_first": ["go2_pg_env/joystick.py", "train.py", "benchmark_specs.py", "public_eval.py"],
   "submission": {
     "required_files": [
       "best_checkpoint/",
@@ -194,5 +96,15 @@
       "Explain why your changes may or may not help sim-to-real transfer.",
       "Describe at least one failed idea and what you learned from it."
     ]
+  },
+  "runtime_overrides": {
+    "num_envs": 1024,
+    "num_eval_envs": 128,
+    "num_evals": 5,
+    "batch_size": 256,
+    "policy_hidden_layer_sizes": [256, 256, 128],
+    "value_hidden_layer_sizes": [256, 256, 128],
+    "stage_1_num_timesteps": 10000000,
+    "stage_2_num_timesteps": 8000000
   }
 }

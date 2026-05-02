@@ -286,7 +286,6 @@ def run_stage(
         save_checkpoint_path=checkpoint_root,
         wrap_env_fn=wrapper.wrap_for_brax_training,
         num_eval_envs=num_eval_envs,
-        vision=False,
         restore_checkpoint_path=str(restore_checkpoint_path) if restore_checkpoint_path else None,
     )
     if randomization_fn is not None:
